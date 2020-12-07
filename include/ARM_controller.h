@@ -88,8 +88,6 @@ void ARM_setted_mod(int data)
 
 
 
-//我好帅啊
-// mmgg帅帅
 //向上运动
 void ARM_UP_move(int data)
 {
