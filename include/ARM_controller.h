@@ -4,7 +4,7 @@
  * @Last Modified by:   Iccccy.xie(binicey@outlook.com) 
  * @Last Modified time: 2020-11-14 17:59:11 
  */
-//ÉèÖÃµç»úÒı½Å
+//è®¾ç½®ç”µæœºå¼•è„š
 #include <AccelStepper.h>
 const int enablePin = 8;
 const int Stepper_x_direction = 4;
@@ -14,26 +14,26 @@ const int Stepper_y = 3;
 const int Stepper_z_direction = 6;
 const int Stepper_z = 4;
 const int SERVO = 9;
-//Íâ²¿º¯ÊıÉùÃ÷
+//å¤–éƒ¨å‡½æ•°å£°æ˜
 extern void BT_ERROR(int Error_NUM);
-// ½¨Á¢µç»ú¶ÔÏó
+// å»ºç«‹ç”µæœºå¯¹è±¡
 AccelStepper stepperX(1, Stepper_x, Stepper_x_direction);
 AccelStepper stepperY(1, Stepper_y, Stepper_y_direction);
 AccelStepper stepperZ(1, Stepper_z, Stepper_z_direction);
-// ¿ØÖÆµç»úÒı½ÅµÄ³õÊ¼»¯
+// æ§åˆ¶ç”µæœºå¼•è„šçš„åˆå§‹åŒ–
 void stepperStup()
 {
-    // µç»úÒı½Å
+    // ç”µæœºå¼•è„š
     pinMode(Stepper_x, OUTPUT);
     pinMode(Stepper_y, OUTPUT);
     pinMode(Stepper_z, OUTPUT);
     pinMode(Stepper_x_direction, OUTPUT);
     pinMode(Stepper_z_direction, OUTPUT);
     pinMode(Stepper_z_direction, OUTPUT);
-    // ¿ª¹ØÒı½Å
+    // å¼€å…³å¼•è„š
     pinMode(enablePin, OUTPUT);
 }
-//µç»ú¿ØÖÆ°å¿ª¹Ø
+//ç”µæœºæ§åˆ¶æ¿å¼€å…³
 void adminControl(bool data)
 {
     if (data == true)
@@ -47,7 +47,7 @@ void adminControl(bool data)
 }
 
 
-// »úĞµ±Û³õÊ¼Î»ÖÃµÄÈ·¶¨
+// æœºæ¢°è‡‚åˆå§‹ä½ç½®çš„ç¡®å®š
 void initPosition(int stepperNUM)
 {
     switch (stepperNUM)
@@ -70,48 +70,57 @@ void initPosition(int stepperNUM)
         break;
     }
 }
-// ´íÎóÓëÔË¶¯¼ì²â
+// é”™è¯¯ä¸è¿åŠ¨æ£€æµ‹
 void ARMError()
 {
     String ErrorMessage = "Invalid Argument!";
     Serial.println(ErrorMessage);
 }
 
-// µ÷ÓÃÔ¤ÉèÀëÏßÄ£Ê½
-// ÀëÏßÄ£Ê½²ÎÊıµÄÉè¶¨
+// è°ƒç”¨é¢„è®¾ç¦»çº¿æ¨¡å¼
+// ç¦»çº¿æ¨¡å¼å‚æ•°çš„è®¾å®š
 void ARM_setted_mod(int data)
 {
     Serial.println(data);
 }
 
-// ÊÖ¶¯²Ù¿ØÄ£Ê½º¯Êı¼¯ºÏ
-//ÏòÉÏÔË¶¯
+// æ‰‹åŠ¨æ“æ§æ¨¡å¼å‡½æ•°é›†åˆ
+
+
+
+
+//å‘ä¸Šè¿åŠ¨
 void ARM_UP_move(int data)
 {
-    // ²ÎÊı¼ìÑé
+    // å‚æ•°æ£€éªŒ
 
     Serial.println(data);
 }
-//ÏòÏÂ
+
+
+//å‘ä¸‹
 void ARM_DOWN_move(int data)
 {
     Serial.println(data);
 }
-//ÏòÓÒ×ª¶¯
+
+//å‘å³è½¬åŠ¨
 void ARM_RIGHT_move(int data)
 {
     Serial.println(data);
 }
-//Ïò×ó×ª¶¯
+
+
+//å‘å·¦è½¬åŠ¨
 void ARM_LEFT_move(int data)
 {
     Serial.println(data);
 }
-//Ç¯×¦¿ØÖÆº¯Êı¼¯ºÏ
+//é’³çˆªæ§åˆ¶å‡½æ•°é›†åˆ
 void armClaw(int data)
 {
-    //0ÎªÕÅ¿ª
-    //1Îª¼Ó½ô
+    //0ä¸ºå¼ å¼€
+    //1ä¸ºåŠ ç´§
     if (data == 1)
     {
         Serial.println("Claw close");
@@ -125,5 +134,5 @@ void armClaw(int data)
         ARMError();
     }
 }
-// Ô¤ÉèÔË¶¯Ä£Ê½
-// ¶ÔÓ¦5¸öÎ»ÖÃÓĞ¸ö²ÎÊı
+// é¢„è®¾è¿åŠ¨æ¨¡å¼
+// å¯¹åº”5ä¸ªä½ç½®æœ‰ä¸ªå‚æ•°
