@@ -1,7 +1,7 @@
 /*** 
  * @Author: Tikear
  * @Date: 2020-12-07 19:13:22
- * @LastEditTime: 2020-12-13 18:28:14
+ * @LastEditTime: 2020-12-13 18:45:53
  * @FilePath: \mechanical_arm_BIT\include\ARM_controller.h
  */
 /*** 
@@ -13,6 +13,7 @@
  */
 //设置电机引脚
 #include <AccelStepper.h>
+#include <servo.h>
 const int enablePin = 8;
 //x与y电机加有减速器减速比1：20
 const int stepper_de = 20;
@@ -122,13 +123,13 @@ void ARM_setted_mod()
     //参数与步骤输入
     int commend[1] = {};
     int data[1] = {};
-    int time[1] = {}
+    int time[1] = {};
     //x,y,z分别对应三个电机的旋转输入参数为转角
     // 正数为正转，负数为逆转（考虑坐标系参数输入）
     // k为夹爪控制命令
     // 1为加紧，0为松开
 
-    for (int i = 0, i < sizeof(commend) / sizeof(int), i++)
+    for (int i = 0; i < sizeof(commend) / sizeof(int); i++)
     {
         switch (commend[i])
         {
@@ -270,16 +271,30 @@ void ARM_RightAndLeft_move(int data)
 }
 //钳爪控制函数集合
 void armClaw(int data)
-{
+{   
+    Servo myservo;
+    int pos;
+    myservo.attach(9);  // Servo对象连接在9号引脚 
     //0为张开
     //1为加紧
     if (data == 1)
     {
         Serial.println("Claw close");
+        for (pos = 0; pos <= 70; pos += 5) { // 0度转到70度
+        // 每一步增加1度
+        myservo.write(pos);              // 告诉伺服电机达到'pos'变量的角度
+        Serial.println(pos);
+        delay(1000);
+        }
     }
     else if (data == 0)
     {
         Serial.println("Claw open");
+        for (pos = 70; pos >= 0; pos -= 5) { // 70度转到0度
+        myservo.write(pos);              // 告诉伺服电机达到'pos'变量的角度
+        Serial.println(pos);
+        delay(1000); 
+        }
     }
     else
     {
