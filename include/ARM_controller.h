@@ -6,6 +6,7 @@
  */
 //设置电机引脚
 #include <AccelStepper.h>
+#include <servo.h>
 const int enablePin = 8;
 const int Stepper_x_direction = 4;
 const int Stepper_x = 2;
@@ -117,16 +118,30 @@ void ARM_LEFT_move(int data)
 }
 //钳爪控制函数集合
 void armClaw(int data)
-{
+{   
+    Servo myservo;
+    int pos;
+    myservo.attach(9);  // Servo对象连接在9号引脚 
     //0为张开
     //1为加紧
     if (data == 1)
     {
         Serial.println("Claw close");
+        for (pos = 0; pos <= 70; pos += 5) { // 0度转到70度
+        // 每一步增加1度
+        myservo.write(pos);              // 告诉伺服电机达到'pos'变量的角度
+        Serial.println(pos);
+        delay(1000);
+        }
     }
     else if (data == 0)
     {
         Serial.println("Claw open");
+        for (pos = 70; pos >= 0; pos -= 5) { // 70度转到0度
+        myservo.write(pos);              // 告诉伺服电机达到'pos'变量的角度
+        Serial.println(pos);
+        delay(1000); 
+        }
     }
     else
     {
