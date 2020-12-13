@@ -1,3 +1,9 @@
+/*** 
+ * @Author: Tikear
+ * @Date: 2020-12-07 19:13:22
+ * @LastEditTime: 2020-12-13 18:22:52
+ * @FilePath: \mechanical_arm_BIT\include\ARM_controller.h
+ */
 /*
  * @Author: Iccccy.xie(binicey@outlook.com) 
  * @Date: 2020-11-14 17:59:11 
